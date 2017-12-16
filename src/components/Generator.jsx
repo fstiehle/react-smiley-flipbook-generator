@@ -9,7 +9,7 @@ export default class Generator extends React.Component {
     super(props);
 
     let smileys = ["🤠", "🐷", "👍"];
-    let delay = 0.6;
+    let delay = 0.8;
 
     if (this.props.match.params.smileys != undefined
       && this.props.match.params.delay != undefined) {
