@@ -22,7 +22,7 @@ export default class Canvas extends React.Component {
     this.width = this.refs.canvas.clientWidth;
     this.canvas.width = this.width;
     this.canvas.height = this.width;
-    this.ctx.font = this.width * 0.7 + "px serif";
+    this.ctx.font = this.width * 0.6 + "px serif";
     this.ctx.textAlign = "center";
     this.ctx.textBaseline = "middle";
     this.updateCanvas();
@@ -35,7 +35,7 @@ export default class Canvas extends React.Component {
 
   updateCanvas() {
     this.processing = true;
-    const center = [this.width / 2, (this.width / 2)];
+    const center = [this.width / 2, this.width / 2];
     const images = [];
     for (let smiley of this.props.smileys) {
       this.fillCanvas();
@@ -66,8 +66,8 @@ export default class Canvas extends React.Component {
   render() {
     const url = window.location.href;
     return(
-      <div>
-        <img className="canvas" ref="canvas" src={this.state.gif} /> 
+      <div ref="canvas" className="canvas">
+        <img src={this.state.gif} /> 
         <p><a href={this.state.gif} download="Smiley Flipbook">Save</a> the gif or Share this <a href={url}>Link</a></p>
       </div>
     );
