@@ -69,7 +69,7 @@ export default class Canvas extends React.Component {
     return(
       <div ref="canvas" className="canvas">
         <img src={this.state.gif} /> 
-        <p><a href={this.state.gif} download="Smiley Flipbook">Save</a> the gif or Share this <a href={url}>Link</a></p>
+        <p><a href={this.state.gif} download="Smiley Flipbook">Save</a> the gif or Share this <a href={url}>Link</a>.</p>
       </div>
     );
   }
