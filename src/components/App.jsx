@@ -9,9 +9,9 @@ export default class App extends React.Component {
     return(
       <div>
         <Switch>
+          <Route path="/:smileys&:delay" component={Generator} />
           <Route path="/" exact component={Generator} />
           <Route path="/:badUri" exact component={Generator} />
-          <Route path="/:smileys&:delay" component={Generator} />
         </Switch>
       </div>
     );
