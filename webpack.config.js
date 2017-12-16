@@ -1,3 +1,6 @@
+var webpack = require('webpack');
+var PROD = JSON.parse(process.env.PROD_ENV || '0');
+
 module.exports = {
     entry: {
         app: './src/app.jsx'
@@ -5,6 +8,11 @@ module.exports = {
     output: {
         filename: './dist/[name].js'
     },
+    plugins: PROD ? [
+        new webpack.optimize.UglifyJsPlugin({
+          compress: { warnings: false }
+        })
+    ] : [],
     devtool: 'source-map',
     module: {
         loaders: [

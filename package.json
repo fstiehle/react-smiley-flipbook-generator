@@ -5,7 +5,7 @@
   "main": "src/app.jsx",
   "scripts": {
     "start": "webpack-dev-server --progress --colors --watch",
-    "build": "webpack -p",
+    "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Fabian Stiehle",
