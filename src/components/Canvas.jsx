@@ -1,0 +1,75 @@
+import React from "react";
+import ReactDOM from "react-dom";
+import gifshot from "gifshot";
+
+export default class Canvas extends React.Component {
+  constructor(props) {
+    super(props);
+    this.processing = false;
+    
+    this.state = {
+      gif: ""
+    }
+  }
+ 
+  componentDidMount() {
+    this.canvas = document.createElement("canvas");
+    if (!this.canvas.getContext) {
+      return;
+    }
+    this.ctx = this.canvas.getContext('2d');
+    this.ctx.fillStyle = 'rgb(200, 0, 0)';
+    this.width = this.refs.canvas.clientWidth;
+    this.height = this.refs.canvas.clientHeight;
+    this.canvas.width = this.width;
+    this.canvas.height = this.height;
+    this.ctx.font = this.width / 2 * 1.2 + "px serif";
+    this.ctx.textAlign = "center";
+    this.updateCanvas();
+  }
+
+  componentDidUpdate() {
+    if (!this.processing)
+      this.updateCanvas();
+  }
+
+  updateCanvas() {
+    this.processing = true;
+    const center = [this.width / 2, (this.height / 2) + 100];
+    const images = [];
+    for (let smiley of this.props.smileys) {
+      this.fillCanvas();
+      this.ctx.fillText(smiley, center[0], center[1]);
+      images.push(this.canvas.toDataURL("image/jpeg", 0.8));
+    }
+    gifshot.createGIF(
+      {'images': images,
+       'interval': this.props.delay,
+       'gifWidth': this.width,
+       'gifHeight': this.height}, (obj) => {
+          if (!obj.error)
+            this.processGif(obj.image);
+    });
+  }
+
+  fillCanvas() {
+    this.ctx.rect(0, 0, this.width, this.height);
+    this.ctx.fillStyle = "white";
+    this.ctx.fill();
+  }
+
+  processGif(image) {
+    this.setState({gif : image});
+    this.processing = false;
+  }
+
+  render() {
+    const url = window.location.href;
+    return(
+      <div>
+        <img className="canvas" ref="canvas" src={this.state.gif} /> 
+        <p><a href={this.state.gif} download="Smiley Flipbook">Save</a> the gif or Share this <a href={url}>Link</a></p>
+      </div>
+    );
+  }
+}
