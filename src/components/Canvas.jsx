@@ -20,11 +20,11 @@ export default class Canvas extends React.Component {
     this.ctx = this.canvas.getContext('2d');
     this.ctx.fillStyle = 'rgb(200, 0, 0)';
     this.width = this.refs.canvas.clientWidth;
-    this.height = this.refs.canvas.clientHeight;
     this.canvas.width = this.width;
-    this.canvas.height = this.height;
-    this.ctx.font = this.width / 2 * 1.2 + "px serif";
+    this.canvas.height = this.width;
+    this.ctx.font = this.width * 0.7 + "px serif";
     this.ctx.textAlign = "center";
+    this.ctx.textBaseline = "middle";
     this.updateCanvas();
   }
 
@@ -35,7 +35,7 @@ export default class Canvas extends React.Component {
 
   updateCanvas() {
     this.processing = true;
-    const center = [this.width / 2, (this.height / 2) + 100];
+    const center = [this.width / 2, (this.width / 2)];
     const images = [];
     for (let smiley of this.props.smileys) {
       this.fillCanvas();
@@ -46,14 +46,14 @@ export default class Canvas extends React.Component {
       {'images': images,
        'interval': this.props.delay,
        'gifWidth': this.width,
-       'gifHeight': this.height}, (obj) => {
+       'gifHeight': this.width}, (obj) => {
           if (!obj.error)
             this.processGif(obj.image);
     });
   }
 
   fillCanvas() {
-    this.ctx.rect(0, 0, this.width, this.height);
+    this.ctx.rect(0, 0, this.width, this.width);
     this.ctx.fillStyle = "white";
     this.ctx.fill();
   }
