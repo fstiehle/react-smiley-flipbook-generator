@@ -29,11 +29,12 @@ export default class Canvas extends React.Component {
   }
 
   componentDidUpdate() {
-    if (!this.processing)
+    if (!this.processing && this.props.delay != 0)
       this.updateCanvas();
   }
 
   updateCanvas() {
+    console.log(this.props.delay)
     this.processing = true;
     const center = [this.width / 2, this.width / 2];
     const images = [];

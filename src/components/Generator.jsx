@@ -25,7 +25,7 @@ export default class Generator extends React.Component {
 
   handleChange(name, value) {
     if (name === "smileys") {
-      this.setState({smileys: value.split(",")});
+      this.setState({smileys: value.replace(" ", "").split(",")});
       this.props.history.replace(value.split(",") + "&" + this.state.delay);
     } else if (name === "delay") {
       this.setState({delay: value});

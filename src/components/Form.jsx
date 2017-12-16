@@ -11,8 +11,7 @@ export default class Form extends React.Component {
   }
 
   handleChange(event) {
-    this.props.onChange(event.target.name,
-      event.target.value.replace(" ", ""));
+    this.props.onChange(event.target.name, event.target.value);
   }
 
   handleSubmit(event) {
