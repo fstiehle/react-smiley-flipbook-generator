@@ -69,10 +69,7 @@ export default class Canvas extends React.Component {
     return(
       <div ref="canvas" className="canvas">
         <img src={this.state.gif} /> 
-        <p><a href={this.state.gif} download="Smiley Flipbook">Save the gif</a> or Copy the Link: 
-         <input className="share" readOnly type="text" 
-          onClick={(e) => {e.target.setSelectionRange(0,e.target.value.length)}} value={url}/>
-        </p>
+        <p><a href={this.state.gif} download="Smiley Flipbook">Save the gif</a> or <a href={url}>Share this Link</a>.</p>
       </div>
     );
   }
