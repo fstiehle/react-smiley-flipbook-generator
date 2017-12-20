@@ -34,7 +34,6 @@ export default class Canvas extends React.Component {
   }
 
   updateCanvas() {
-    console.log(this.props.delay)
     this.processing = true;
     const center = [this.width / 2, this.width / 2];
     const images = [];
@@ -49,7 +48,8 @@ export default class Canvas extends React.Component {
        'gifWidth': this.width,
        'gifHeight': this.width}, (obj) => {
           if (!obj.error)
-            this.processGif(obj.image);
+            this.setState({gif : obj.image});
+            this.processing = false;
     });
   }
 
@@ -57,11 +57,6 @@ export default class Canvas extends React.Component {
     this.ctx.rect(0, 0, this.width, this.width);
     this.ctx.fillStyle = "white";
     this.ctx.fill();
-  }
-
-  processGif(image) {
-    this.setState({gif : image});
-    this.processing = false;
   }
 
   render() {
