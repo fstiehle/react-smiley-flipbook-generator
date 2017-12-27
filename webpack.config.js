@@ -9,8 +9,21 @@ module.exports = {
         filename: './dist/[name].js'
     },
     plugins: PROD ? [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
+            parallel: true,
+            compress: {
+              warnings: false,
+              screw_ie8: true
+            },
+            output: {
+                comments: false,
+            },
+            exclude: [/\.min\.js$/gi] // skip pre-minified libs
         })
     ] : [],
     devtool: 'source-map',
